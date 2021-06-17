@@ -4,7 +4,7 @@ const numerosPares = [2, 4, 6];
 const numerosImpares = [1, 3, 5];
 
 const numeros = [...numerosPares, ...numerosImpares];
-// "..." significa abrir esse array e pegar os dados dentro dele e jogar esses dados dentro do array numeros (e nao pegar o array e jogar dentro do outro array)
+// "..." significa abrir esse array e pegar os dados dentro dele e jogar esses dados dentro do array (e nao pegar o array, em si, e jogar dentro do outro array)
 // "..." é um método do destructuring
 
 // console.log(numeros)
