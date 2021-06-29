@@ -1,13 +1,20 @@
+// classe abstrata - serve pricipalmente para ser herdada, e nao usada
 export class Conta {
   constructor(saldoInicial, cliente, agencia) {
+    if (this.constructor == Conta) {
+      throw new Error("Voce nao deveria instanciar um objeto do tipo conta");
+    }
+
     this._saldo = saldoInicial;
     this._cliente = cliente;
     this._agencia = agencia;
   }
 
+  // metodo abstrato
   sacar(valor) {
-    let taxa = 1;
-    return this._sacar(valor, taxa);
+    throw new Error("O método Sacar da conta é abstrato");
+    //let taxa = 1;
+    //return this._sacar(valor, taxa);
   }
 
   _sacar(valor, taxa) {
@@ -31,8 +38,4 @@ export class Conta {
     const valorSacado = this.sacar(valor);
     conta.depositar(valorSacado);
   }
-
-  /*teste() {
-    console.log("teste na classe conta");
-  }*/
 }
