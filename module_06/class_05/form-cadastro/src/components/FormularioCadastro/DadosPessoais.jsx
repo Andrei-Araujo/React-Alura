@@ -1,35 +1,16 @@
 import { Button, FormControlLabel, Switch, TextField } from "@material-ui/core";
-import { React, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import ValidacoesCadastro from "../../contexts/ValidacoesCadastro";
+import useErros from "../../hooks/useErros";
 
 function DadosPessoais({ aoEnviar }) {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [cpf, setCpf] = useState("");
   const [promocoes, setPromocoes] = useState(true);
-  const [novidades, setNovidades] = useState(true);
-  const [erros, setErros] = useState({
-    cpf: { valido: true, texto: "" },
-    nome: { valido: true, texto: "" },
-  });
-
+  const [novidades, setNovidades] = useState(false);
   const validacoes = useContext(ValidacoesCadastro);
-
-  function validarCampos(event) {
-    const { name, value } = event.target;
-    const novoEstado = { ...erros };
-    novoEstado[name] = validacoes[name](value);
-    setErros(novoEstado);
-  }
-
-  function possoEnviar() {
-    for (let campo in erros) {
-      if (!erros[campo].valido) {
-        return false;
-      }
-    }
-    return true;
-  }
+  const [erros, validarCampos, possoEnviar] = useErros(validacoes);
 
   return (
     <form
@@ -47,14 +28,13 @@ function DadosPessoais({ aoEnviar }) {
         }}
         onBlur={validarCampos}
         error={!erros.nome.valido}
-        helperText={erros.nome.valido}
+        helperText={erros.nome.texto}
         id="nome"
-        label="nome"
+        label="Nome"
         name="nome"
-        color="secondary"
         variant="outlined"
-        fullWidth
         margin="normal"
+        fullWidth
       />
       <TextField
         value={sobrenome}
@@ -62,11 +42,11 @@ function DadosPessoais({ aoEnviar }) {
           setSobrenome(event.target.value);
         }}
         id="sobrenome"
-        label="sobrenome"
         name="sobrenome"
+        label="Sobrenome"
         variant="outlined"
-        fullWidth
         margin="normal"
+        fullWidth
       />
       <TextField
         value={cpf}
@@ -77,42 +57,42 @@ function DadosPessoais({ aoEnviar }) {
         error={!erros.cpf.valido}
         helperText={erros.cpf.texto}
         id="CPF"
-        label="CPF"
         name="cpf"
+        label="CPF"
         variant="outlined"
-        fullWidth
         margin="normal"
+        fullWidth
       />
+
       <FormControlLabel
         label="Promoções"
         control={
           <Switch
             checked={promocoes}
-            onChange={(e) => {
-              setPromocoes(e.target.checked);
+            onChange={(event) => {
+              setPromocoes(event.target.checked);
             }}
             name="promocoes"
-            defaultChecked={promocoes}
-            color="primary"
-          />
-        }
-      />
-      <FormControlLabel
-        label="Novidades"
-        control={
-          <Switch
-            checked={novidades}
-            onChange={(e) => {
-              setNovidades(e.target.checked);
-            }}
-            name="novidades"
-            defaultChecked={novidades}
             color="primary"
           />
         }
       />
 
-      <Button variant="contained" color="primary" type="submit">
+      <FormControlLabel
+        label="Novidades"
+        control={
+          <Switch
+            checked={novidades}
+            onChange={(event) => {
+              setNovidades(event.target.checked);
+            }}
+            name="novidades"
+            color="primary"
+          />
+        }
+      />
+
+      <Button type="submit" variant="contained" color="primary">
         Próximo
       </Button>
     </form>

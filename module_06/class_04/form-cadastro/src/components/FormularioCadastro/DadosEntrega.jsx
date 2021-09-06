@@ -1,17 +1,17 @@
-import { Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-
+import { TextField, Button } from "@material-ui/core";
 function DadosEntrega({ aoEnviar }) {
   const [cep, setCep] = useState("");
   const [endereco, setEndereco] = useState("");
   const [numero, setNumero] = useState("");
   const [estado, setEstado] = useState("");
   const [cidade, setCidade] = useState("");
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        aoEnviar(cep, endereco, numero, estado, cidade);
+        aoEnviar({ cep, endereco, numero, estado, cidade });
       }}
     >
       <TextField
@@ -20,11 +20,10 @@ function DadosEntrega({ aoEnviar }) {
           setCep(event.target.value);
         }}
         id="cep"
-        label="cep"
         name="cep"
+        label="CEP"
         type="number"
         variant="outlined"
-        fullWidth
         margin="normal"
       />
       <TextField
@@ -33,12 +32,12 @@ function DadosEntrega({ aoEnviar }) {
           setEndereco(event.target.value);
         }}
         id="endereco"
-        label="endereco"
-        name="endereco"
+        name="endereço"
+        label="Enderço"
         type="text"
         variant="outlined"
-        fullWidth
         margin="normal"
+        fullWidth
       />
       <TextField
         value={numero}
@@ -46,8 +45,8 @@ function DadosEntrega({ aoEnviar }) {
           setNumero(event.target.value);
         }}
         id="numero"
-        label="numero"
         name="numero"
+        label="Numero"
         type="number"
         variant="outlined"
         margin="normal"
@@ -58,8 +57,8 @@ function DadosEntrega({ aoEnviar }) {
           setEstado(event.target.value);
         }}
         id="estado"
-        label="estado"
         name="estado"
+        label="Estado"
         type="text"
         variant="outlined"
         margin="normal"
@@ -70,8 +69,8 @@ function DadosEntrega({ aoEnviar }) {
           setCidade(event.target.value);
         }}
         id="cidade"
-        label="cidade"
         name="cidade"
+        label="Cidade"
         type="text"
         variant="outlined"
         margin="normal"

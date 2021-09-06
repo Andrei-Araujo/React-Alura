@@ -36,7 +36,7 @@ function FormularioCadastro({ aoEnviar }) {
           <StepLabel>Login</StepLabel>
         </Step>
         <Step>
-          <StepLabel>Enndereço</StepLabel>
+          <StepLabel>Endereço</StepLabel>
         </Step>
         <Step>
           <StepLabel>Entrega</StepLabel>
